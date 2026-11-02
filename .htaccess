@@ -1,0 +1,5 @@
+# Opening http://localhost/CinemaBooking/ sends visitors to the public folder.
+# Code, config and storage folders are never served directly.
+RewriteEngine On
+RewriteRule ^(app|config|database|lib|storage)(/|$) - [F,L]
+RewriteRule ^$ public/ [R=302,L]

@@ -1,0 +1,5 @@
+storage/logs/*.log
+# Uploaded posters (the demo .svg posters stay in git)
+public/uploads/posters/*.jpg
+public/uploads/posters/*.png
+public/uploads/posters/*.webp
