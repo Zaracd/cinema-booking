@@ -16,7 +16,7 @@ class Mailer
 
         if (empty($c['enabled'])) {
             $entry = sprintf("==== %s ====\nTo: %s <%s>\nSubject: %s\n\n%s\n\n",
-                date('Y-m-d H:i:s'), $toName, $toEmail, $subject, trim(strip_tags(str_replace(['<br>', '</p>', '</tr>'], "\n", $html))));
+                date('Y-m-d H:i:s'), $toName, $toEmail, $subject, trim(html_entity_decode(strip_tags(str_replace(['<br>', '</p>', '</tr>', '</h2>', '</h3>', '</td><td'], ["\n", "\n", "\n", "\n", "\n", ': </td><td'], $html)))));
             file_put_contents(ROOT . '/storage/logs/mail.log', $entry, FILE_APPEND | LOCK_EX);
             return true;
         }

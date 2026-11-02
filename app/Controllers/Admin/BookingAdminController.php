@@ -43,7 +43,7 @@ class BookingAdminController extends Controller
             flash('error', 'This booking is already cancelled.');
         } else {
             Booking::cancel($id);
-            BookingController::sendCancellationEmail(Booking::find($id));
+            BookingController::sendCancellationEmail(BookingController::afterCancel($booking));
             flash('success', "Booking #$id was cancelled and its seats released.");
         }
         redirect("/admin/bookings/$id");

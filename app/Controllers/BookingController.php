@@ -154,7 +154,7 @@ class BookingController extends Controller
             redirect("/bookings/$id");
         }
         Booking::cancel($id);
-        $booking = Booking::find($id);
+        $booking = self::afterCancel($booking);
         self::sendCancellationEmail($booking);
         flash('success', 'Booking #' . $id . ' was cancelled' . ($booking['payment_status'] === 'Refunded' ? ' and your payment will be refunded.' : '.'));
         redirect('/account/bookings');
@@ -208,6 +208,15 @@ class BookingController extends Controller
         $html = self::emailLayout('Your booking is confirmed', $b, '<p>Thank you for booking with ' . e(config('app.name'))
             . '. Please show this booking number at the entrance.</p>');
         Mailer::send($b['email'], $b['full_name'], 'Booking confirmed #' . $b['booking_id'] . ' - ' . $b['title'], $html);
+    }
+
+    /** Fresh booking row after cancelling, keeping the seat list so the email can still name the seats. */
+    public static function afterCancel(array $before): array
+    {
+        $after = Booking::find((int) $before['booking_id']);
+        $after['seat_list'] = $before['seat_list'];
+        $after['ticket_count'] = $before['ticket_count'];
+        return $after;
     }
 
     public static function sendCancellationEmail(array $b): void

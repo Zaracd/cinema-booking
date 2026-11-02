@@ -333,6 +333,10 @@ a.stat:hover { border-color: #3a4357; }
 .kv dd { margin: 0; }
 
 /* ----- Responsive ----- */
+@media (max-width: 1180px) {
+  /* The admin sidebar takes 240px, so stack the two admin columns sooner. */
+  .admin-content .dash-grid { grid-template-columns: 1fr; }
+}
 @media (max-width: 960px) {
   .hero-inner { grid-template-columns: 1fr; }
   .hero-poster { display: none; }
@@ -365,8 +369,12 @@ a.stat:hover { border-color: #3a4357; }
   .booking-side { grid-column: 1 / -1; justify-items: start; grid-auto-flow: column; align-items: center; justify-content: space-between; }
   .footer-inner { grid-template-columns: 1fr; }
   .kv { grid-template-columns: 1fr; }
-  .seat { width: 24px; height: 24px; font-size: .6rem; }
+  .seat { width: 22px; height: 22px; font-size: .6rem; }
   .row-seats { gap: 4px; }
+  .row-seats .seat:nth-child(4n) { margin-right: 4px; }
+  .seat-panel { padding: 14px 8px; }
+  .seat-row { gap: 6px; }
+  .seat-row .row-label:last-child { display: none; }
 }
 
 /* ----- Print the ticket ----- */
