@@ -7,7 +7,7 @@
     <form class="filters" method="get" action="<?= url('/movies') ?>">
         <label class="filter-search">
             <?= icon('search') ?>
-            <input type="search" name="q" value="<?= e($filters['q']) ?>" placeholder="Search by title" maxlength="100" aria-label="Search by title">
+            <input type="search" name="q" value="<?= e($filters['q']) ?>" placeholder="Search title, Arabic title, director or actor" maxlength="100" aria-label="Search movies">
         </label>
         <select name="genre" aria-label="Genre">
             <option value="">All genres</option>

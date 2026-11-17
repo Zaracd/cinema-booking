@@ -6,16 +6,29 @@
             <a class="back-link" href="<?= url('/movies') ?>"><?= icon('back', 16) ?> All movies</a>
             <?= status_badge($movie['status']) ?>
             <h1><?= e($movie['title']) ?></h1>
+            <?php if (!empty($movie['original_title'])): ?>
+                <p class="original-title" lang="ar" dir="rtl"><?= e($movie['original_title']) ?></p>
+            <?php endif; ?>
             <ul class="meta-list">
                 <?php if ((float) $movie['rating'] > 0): ?>
-                    <li data-tip="Rating out of 10"><?= icon('star', 16) ?> <?= e(number_format((float) $movie['rating'], 1)) ?>/10</li>
+                    <li data-tip="IMDb rating out of 10"><?= icon('star', 16) ?> <?= e(number_format((float) $movie['rating'], 1)) ?>/10</li>
                 <?php endif; ?>
                 <li data-tip="Duration"><?= icon('clock', 16) ?> <?= intdiv((int) $movie['duration'], 60) ?>h <?= (int) $movie['duration'] % 60 ?>m</li>
                 <li data-tip="Release date"><?= icon('calendar', 16) ?> <?= e(fmt_date($movie['release_date'])) ?></li>
+                <li data-tip="Language"><?= icon('film', 16) ?> <?= e($movie['language']) ?></li>
             </ul>
             <p class="genres"><?php foreach (explode(', ', (string) $movie['genres']) as $g): if ($g): ?><span class="pill"><?= e($g) ?></span><?php endif; endforeach; ?></p>
-            <p class="description"><?= nl2br(e($movie['description'])) ?></p>
+            <?php foreach (preg_split('/\R+/u',trim($movie['description'])) as $para): ?>
+                <p class="description" dir="auto"><?= e($para) ?></p>
+            <?php endforeach; ?>
             <p><span class="muted">Director:</span> <strong><?= e($movie['director']) ?></strong></p>
+            <?php if (!empty($movie['starring'])): ?>
+                <p><span class="muted">Starring:</span> <?= e($movie['starring']) ?></p>
+            <?php endif; ?>
+            <p class="movie-links">
+                <a class="btn btn-sm btn-ghost" target="_blank" rel="noopener" href="https://www.imdb.com/find/?q=<?= urlencode($movie['title'] . ' ' . substr($movie['release_date'], 0, 4)) ?>"><?= icon('star', 14) ?> IMDb page</a>
+                <a class="btn btn-sm btn-ghost" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=<?= urlencode($movie['title'] . ' ' . substr($movie['release_date'], 0, 4) . ' trailer') ?>"><?= icon('film', 14) ?> Watch trailer</a>
+            </p>
         </div>
     </div>
 </section>

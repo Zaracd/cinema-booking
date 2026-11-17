@@ -11,6 +11,9 @@
     </a>
     <div class="movie-card-body">
         <h3><a href="<?= url('/movies/' . (int) $m['movie_id']) ?>"><?= e($m['title']) ?></a></h3>
+        <?php if (!empty($m['original_title']) && str_starts_with((string) $m['language'], 'Arabic')): ?>
+            <p class="card-ar" lang="ar" dir="rtl"><?= e($m['original_title']) ?></p>
+        <?php endif; ?>
         <p class="muted small"><?= e($m['genres'] ?? '') ?> · <?= (int) $m['duration'] ?> min</p>
         <?php if ($m['status'] === 'Now Showing'): ?>
             <a class="btn btn-sm btn-block" href="<?= url('/movies/' . (int) $m['movie_id']) ?>#showtimes"><?= icon('ticket', 16) ?> Book tickets</a>

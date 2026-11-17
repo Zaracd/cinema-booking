@@ -18,8 +18,8 @@ class Movie extends Model
         $where = [];
         $params = [];
         if (!empty($f['q'])) {
-            $where[] = 'm.title LIKE ?';
-            $params[] = '%' . $f['q'] . '%';
+            $where[] = '(m.title LIKE ? OR m.original_title LIKE ? OR m.director LIKE ? OR m.starring LIKE ?)';
+            array_push($params, ...array_fill(0, 4, '%' . $f['q'] . '%'));
         }
         if (!empty($f['status'])) {
             $where[] = 'm.status = ?';
@@ -60,18 +60,18 @@ class Movie extends Model
 
     public static function create(array $d, array $genreIds): int
     {
-        $id = self::insert('INSERT INTO movies (title, description, duration, release_date, director, rating, poster, status)
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-            [$d['title'], $d['description'], $d['duration'], $d['release_date'], $d['director'], $d['rating'], $d['poster'], $d['status']]);
+        $id = self::insert('INSERT INTO movies (title, original_title, language, description, duration, release_date, director, starring, rating, poster, status)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [$d['title'], $d['original_title'], $d['language'], $d['description'], $d['duration'], $d['release_date'], $d['director'], $d['starring'], $d['rating'], $d['poster'], $d['status']]);
         self::syncGenres($id, $genreIds);
         return $id;
     }
 
     public static function update(int $id, array $d, array $genreIds): void
     {
-        self::run('UPDATE movies SET title = ?, description = ?, duration = ?, release_date = ?, director = ?, rating = ?, poster = ?, status = ?
+        self::run('UPDATE movies SET title = ?, original_title = ?, language = ?, description = ?, duration = ?, release_date = ?, director = ?, starring = ?, rating = ?, poster = ?, status = ?
                    WHERE movie_id = ?',
-            [$d['title'], $d['description'], $d['duration'], $d['release_date'], $d['director'], $d['rating'], $d['poster'], $d['status'], $id]);
+            [$d['title'], $d['original_title'], $d['language'], $d['description'], $d['duration'], $d['release_date'], $d['director'], $d['starring'], $d['rating'], $d['poster'], $d['status'], $id]);
         self::syncGenres($id, $genreIds);
     }
 

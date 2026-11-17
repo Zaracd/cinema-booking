@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#0f5e4a"/><stop offset="1" stop-color="#a8e6cf"/></linearGradient>
+<radialGradient id="r" cx="0.7" cy="0.25" r="0.6"><stop offset="0" stop-color="#fff" stop-opacity="0.3"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
+<rect width="400" height="600" fill="url(#g)"/><rect width="400" height="600" fill="url(#r)"/>
+<circle cx="283" cy="167" r="107" fill="#fff" opacity="0.07"/>
+<text x="200" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#fff" opacity="0.8" letter-spacing="6">2012</text>
+<rect x="0" y="470" width="400" height="130" fill="#000" opacity="0.4"/>
+<text x="200" y="300" text-anchor="middle" direction="rtl" font-family="Tahoma, Arial, sans-serif" font-size="48" font-weight="700" fill="#fff" letter-spacing="0">وجدة</text>
+<text x="200" y="352" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" fill="#fff" opacity="0.85" letter-spacing="3">WADJDA</text>
+<text x="200" y="515" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#fff" opacity="0.85" letter-spacing="3">A FILM BY HAIFAA AL-MANSOUR</text>
+<text x="200" y="545" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#fff" opacity="0.7" letter-spacing="3">DRAMA · FAMILY</text>
+<text x="200" y="575" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#f5c518">IMDb ★ 7.5</text>
+</svg>

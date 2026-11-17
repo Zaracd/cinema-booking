@@ -11,9 +11,22 @@ $action = $movie ? url('/admin/movies/' . (int) $movie['movie_id']) : url('/admi
             <input type="text" name="title" value="<?= e($val('title')) ?>" required maxlength="150">
             <?= field_error($errors, 'title') ?>
         </label>
+        <div class="field-row">
+            <label class="field <?= isset($errors['original_title']) ? 'invalid' : '' ?>">
+                <span>Arabic / original title (optional)</span>
+                <input type="text" name="original_title" value="<?= e($val('original_title')) ?>" maxlength="150" dir="auto">
+                <?= field_error($errors, 'original_title') ?>
+            </label>
+            <label class="field <?= isset($errors['language']) ? 'invalid' : '' ?>">
+                <span>Language</span>
+                <input type="text" name="language" value="<?= e($val('language', 'English')) ?>" required maxlength="50" list="languages">
+                <datalist id="languages"><option>English</option><option>Arabic</option><option>Arabic / English</option></datalist>
+                <?= field_error($errors, 'language') ?>
+            </label>
+        </div>
         <label class="field <?= isset($errors['description']) ? 'invalid' : '' ?>">
             <span>Description</span>
-            <textarea name="description" required><?= e($val('description')) ?></textarea>
+            <textarea name="description" required dir="auto"><?= e($val('description')) ?></textarea>
             <?= field_error($errors, 'description') ?>
         </label>
         <div class="field-row three">
@@ -46,6 +59,11 @@ $action = $movie ? url('/admin/movies/' . (int) $movie['movie_id']) : url('/admi
                 </select>
             </label>
         </div>
+        <label class="field <?= isset($errors['starring']) ? 'invalid' : '' ?>">
+            <span>Starring (optional, names separated by commas)</span>
+            <input type="text" name="starring" value="<?= e($val('starring')) ?>" maxlength="255">
+            <?= field_error($errors, 'starring') ?>
+        </label>
         <div class="field <?= isset($errors['genres']) ? 'invalid' : '' ?>">
             <span>Genres</span>
             <div class="genre-checks">

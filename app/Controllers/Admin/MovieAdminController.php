@@ -109,7 +109,10 @@ class MovieAdminController extends Controller
           ->required('description', 'Description')
           ->required('duration', 'Duration')->integer('duration', 30, 400)
           ->required('release_date', 'Release date')->date('release_date')
+          ->max('original_title', 150)
+          ->required('language', 'Language')->max('language', 50)
           ->required('director', 'Director')->max('director', 100)
+          ->max('starring', 255)
           ->required('rating', 'Rating')->number('rating', 0, 10)
           ->in('status', Movie::STATUSES);
         $genreIds = array_map('intval', (array) ($_POST['genres'] ?? []));
@@ -141,6 +144,9 @@ class MovieAdminController extends Controller
 
         return [[
             'title'        => $v->get('title'),
+            'original_title' => $v->get('original_title') !== '' ? $v->get('original_title') : null,
+            'language'     => $v->get('language'),
+            'starring'     => $v->get('starring') !== '' ? $v->get('starring') : null,
             'description'  => $v->get('description'),
             'duration'     => (int) $v->get('duration'),
             'release_date' => $v->get('release_date'),

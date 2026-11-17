@@ -148,6 +148,9 @@ a.pill:hover { border-color: var(--accent); }
 .meta-list li { display: inline-flex; align-items: center; gap: 6px; }
 .meta-list .icon { color: var(--gold); }
 .description { color: #c9d0dd; font-size: 1.02rem; max-width: 720px; }
+.original-title { text-align: left; margin: -6px 0 12px; font-size: 1.4rem; font-weight: 700; color: var(--gold); font-family: Tahoma, Arial, sans-serif; }
+.movie-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.card-ar { margin: 2px 0 0; font-size: .9rem; color: var(--gold); font-family: Tahoma, Arial, sans-serif; text-align: right; }
 
 .date-tabs { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 18px; }
 .date-tab { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; min-width: 78px; padding: 10px 12px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; color: var(--text); cursor: pointer; font: inherit; }
