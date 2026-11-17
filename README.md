@@ -16,7 +16,7 @@ genres), halls and seats, screenings (no overlaps in the same hall), bookings an
 1. Install [XAMPP](https://www.apachefriends.org/) and start **Apache** and **MySQL** in the XAMPP Control Panel.
 2. Copy this whole `CinemaBooking` folder into `C:\xampp\htdocs\`.
 3. Open <http://localhost/phpmyadmin>, choose **Import**, pick `database/cinema_db.sql`, and click **Import**.
-  This creates the `cinema_db` database with 22 top-rated IMDb films (13 English, 9 Arabic), halls, seats and screenings for the coming week. The film list is in `database/movies-data.js`; after changing it run `node database/generate-sql.js` and import again.
+  This creates the `cinema_db` database with 22 top-rated IMDb films (13 English, 9 Arabic), halls, seats and screenings for the coming week. The film list is in `database/movies-data.js`; after changing it run `node database/generate-sql.js` and import again. Official posters (from Wikipedia) are in `public/uploads/posters/films/`; a film without one there gets a generated poster.
 4. Open <http://localhost/CinemaBooking/public/>
 
 If your MySQL user or password is not `root` with an empty password, change the `db` section in `config/config.php`.

@@ -149,8 +149,15 @@ w(`INSERT INTO users (full_name, email, phone, password, role) VALUES
 w('INSERT INTO genres (genre_name) VALUES ' + genres.map((g) => `(${q(g)})`).join(', ') + ';');
 
 const slug = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+// Official posters (from Wikipedia) live in public/uploads/posters/films/<slug>.jpg|png.
+// A film without one there falls back to its generated .svg poster.
+const filmsDir = path.join(__dirname, '..', 'public', 'uploads', 'posters', 'films');
+const posterOf = (m) => {
+  const ext = ['jpg', 'png', 'webp'].find((x) => fs.existsSync(path.join(filmsDir, `${slug(m.title)}.${x}`)));
+  return ext ? `films/${slug(m.title)}.${ext}` : slug(m.title) + '.svg';
+};
 w('INSERT INTO movies (title, original_title, language, description, duration, release_date, director, starring, rating, poster, status) VALUES\n' +
-  movies.map((m) => `  (${q(m.title)}, ${q(m.ar)}, ${q(m.lang)}, ${q(m.desc)}, ${m.dur}, ${q(m.rel)}, ${q(m.dir)}, ${q(m.cast)}, ${m.rating}, ${q(slug(m.title) + '.svg')}, ${q(m.status)})`).join(',\n') + ';');
+  movies.map((m) => `  (${q(m.title)}, ${q(m.ar)}, ${q(m.lang)}, ${q(m.desc)}, ${m.dur}, ${q(m.rel)}, ${q(m.dir)}, ${q(m.cast)}, ${m.rating}, ${q(posterOf(m))}, ${q(m.status)})`).join(',\n') + ';');
 
 const mg = [];
 movies.forEach((m, i) => m.g.forEach((g) => mg.push(`(${i + 1}, ${genres.indexOf(g) + 1})`)));
